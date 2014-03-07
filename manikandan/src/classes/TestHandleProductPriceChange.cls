@@ -14,23 +14,15 @@ Total_Inventory__c = 10)
 };
 insert products;
 
-Line_Item__c[] lineItems = new Line_Item__c[] {
-new Line_Item__c(Invoice_Statement__c = invoice.id, Merchandise__c = products[0].id,
-Unit_Price__c = 10, Units_Sold__c = 3),
-new Line_Item__c(Invoice_Statement__c = invoice.id, Merchandise__c = products[1].id,
-Unit_Price__c = 11, Units_Sold__c = 6)
-};
-insert lineItems;
+
 
 products[0].price__c = 20; // raise price
 products[1].price__c = 5; // lower price
 Test.startTest();
 update products;
 Test.stopTest();
-lineItems =
-[SELECT id, unit_price__c FROM Line_Item__c WHERE id IN :lineItems];
-System.assert(lineItems[0].unit_price__c == 10); // unchanged
-System.assert(lineItems[1].unit_price__c == 5); // changed!!
+
+
 }
 
 }
